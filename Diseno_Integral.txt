@@ -1,0 +1,9 @@
+DISEÑO INTEGRAL: DIF CONTIGO MAYOR
+---------------------------------
+Objetivo: Reducir la brecha digital en adultos mayores de Jalisco.
+Componentes:
+1. Interfaz de 4 cuadrantes táctiles de alta visibilidad.
+2. Procesamiento de lenguaje natural para registro PUB.
+3. Ecosistema espejo para cuidadores.
+Autor: noemi-desing
+Fecha: Abril 2026

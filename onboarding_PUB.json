@@ -1,0 +1,9 @@
+{
+  "flujo": "Registro DIF Jalisco",
+  "pasos": [
+    {"pregunta": "Hola, ¿me dices tu nombre completo?", "campo": "nombre"},
+    {"pregunta": "¿Cuál es tu fecha de nacimiento?", "campo": "fecha_nacimiento"},
+    {"pregunta": "¿En qué municipio de Jalisco vives?", "campo": "municipio"}
+  ],
+  "meta": "Vincular al Padrón Único de Beneficiarios (PUB)"
+}
