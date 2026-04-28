@@ -1,0 +1,35 @@
+{
+  "entidad": "DIF Jalisco",
+  "proyecto": "DIF Contigo Mayor",
+  "ultima_actualizacion": "2026-04-28",
+  "destinos_seguros": [
+    {
+      "nombre": "DIF Jalisco Central (Sede Alcalde)",
+      "direccion": "Av. Alcalde 1220, Col. Miraflores, Guadalajara",
+      "tramites": ["INAPAM", "Jalisco te Reconoce", "Validación PUB"],
+      "coordenadas": {"lat": 20.6934, "lng": -103.3486},
+      "asistente_voz": "Te guiaré al DIF Central por Avenida Alcalde; es una zona bien iluminada y con vigilancia constante."
+    },
+    {
+      "nombre": "Unidad Administrativa (Módulo Mi Pasaje)",
+      "direccion": "Av. Prolongación Alcalde 1221, Guadalajara",
+      "tramites": ["Entrega de tarjetas Mi Pasaje", "Recarga de pasajes"],
+      "coordenadas": {"lat": 20.6945, "lng": -103.3490},
+      "asistente_voz": "Vamos a la Unidad Administrativa. La entrada para adultos mayores cuenta con rampa de acceso y personal de apoyo."
+    },
+    {
+      "nombre": "Centro de Día Eduardo Montaño",
+      "direccion": "Av. de los Maestros 1021, Guadalajara",
+      "servicios": ["Comedor", "Actividades recreativas", "Atención médica"],
+      "coordenadas": {"lat": 20.6912, "lng": -103.3512},
+      "asistente_voz": "Ruta segura hacia el Centro Eduardo Montaño. Hay banquetas amplias y cruces peatonales seguros para caminar con calma."
+    },
+    {
+      "nombre": "UNI3 (Universidad de la Tercera Edad)",
+      "direccion": "Calle de la Paz 25, Zapopan",
+      "servicios": ["Cursos de computación", "Talleres de arte", "Convivencia"],
+      "coordenadas": {"lat": 20.7125, "lng": -103.3910},
+      "asistente_voz": "La ruta a la UNI3 es muy segura. Te avisaré en cuanto estemos llegando a la parada de transporte accesible."
+    }
+  ]
+}
