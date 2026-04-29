@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIF Contigo Mayor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <header>
+        <h1>DIF <span>Jalisco</span></h1>
+        <p>Asistente Proactivo</p>
+    </header>
+
+    <div class="grid-container">
+        <button id="btn-sos" class="card sos">🚨 SOS</button>
+        <button id="btn-voz" class="card voz">🎙️ HABLAR</button>
+        <button id="btn-rutas" class="card mapa">📍 RUTAS</button>
+        <button id="btn-perfil" class="card perfil">👤 MI QR</button>
+    </div>
+
+    <script>
+        const socket = io();
+        const synth = window.speechSynthesis;
+        const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const rec = new Recognition();
+        rec.lang = 'es-MX';
+
+        function hablar(texto) {
+            const u = new SpeechSynthesisUtterance(texto);
+            u.lang = 'es-MX'; u.rate = 0.9;
+            synth.speak(u);
+        }
+
+        // Acciones
+        document.getElementById('btn-sos').onclick = () => {
+            hablar("Alerta enviada. Tu familia ha sido notificada.");
+            socket.emit('sos-activado', { fecha: new Date() });
+        };
+
+        document.getElementById('btn-voz').onclick = () => {
+            hablar("Te escucho, ¿en qué te ayudo?");
+            rec.start();
+        };
+
+        rec.onresult = (e) => {
+            const voz = e.results[0][0].transcript.toLowerCase();
+            if(voz.includes("pasaje") || voz.includes("trámite")) {
+                hablar("Revisé tu Padrón Único. Te falta la CURP para Mi Pasaje. ¿Quieres que te ayude?");
+            } else if(voz.includes("ruta")) {
+                hablar("Calculando ruta segura al DIF Central por Avenida Alcalde.");
+                window.open("https://www.google.com/maps");
+            }
+        };
+
+        window.onload = () => hablar("Bienvenido. Presiona el botón azul para hablar.");
+    </script>
+</body>
+</html>

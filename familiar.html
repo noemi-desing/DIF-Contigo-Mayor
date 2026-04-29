@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>DIF Contigo - Monitor Familiar</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        .alerta-sos { background: #ff0000; color: white; padding: 20px; border-radius: 15px; animation: parpadeo 1s infinite; text-align: center; display: none; }
+        @keyframes parpadeo { 0% {opacity: 1;} 50% {opacity: 0.5;} 100% {opacity: 1;} }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Monitor <span>Familiar</span></h1>
+    </header>
+    <main style="padding: 20px;">
+        <div id="aviso-sos" class="alerta-sos">
+            <h2>⚠️ ¡ALERTA SOS ACTIVADA!</h2>
+            <p id="hora-sos"></p>
+        </div>
+        <div class="card" style="background: white; color: #333; padding: 20px; margin-top: 20px;">
+            <h3>Estatus del Adulto Mayor</h3>
+            <p>✅ Sistema conectado y vigilando.</p>
+            <p>📍 Última ubicación: Guadalajara, Jalisco.</p>
+        </div>
+    </main>
+    <script>
+        const socket = io();
+        socket.on('alerta-familiar', (data) => {
+            document.getElementById('aviso-sos').style.display = 'block';
+            document.getElementById('hora-sos').innerText = "Recibida a las: " + data.hora;
+        });
+    </script>
+</body>
+</html>
