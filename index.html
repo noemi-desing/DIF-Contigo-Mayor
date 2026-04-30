@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DIF Contigo Mayor - Familiar</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <header class="header-main">
+        <h1 class="app-title">DIF Contigo Mayor</h1>
+        <img src="logo dif jalisco.jpg" alt="DIF Jalisco" class="img-logo">
+    </header>
+
+    <main class="app-container" id="menu-principal">
+        <div class="bubble-wrapper">
+            <button id="btn-acompanamiento" class="bubble bg-gris" onclick="iniciarPlatica()">
+                <span>PLATICAR</span>
+            </button>
+            <p class="label">Compañía</p>
+        </div>
+
+        <div class="bubble-wrapper">
+            <button id="btn-asesoria" class="bubble bg-naranja" onclick="abrirPanelApoyos()">
+                <span>APOYOS</span>
+            </button>
+            <p class="label">Trámites y QR</p>
+        </div>
+
+        <div class="bubble-wrapper">
+            <button id="btn-sos" class="bubble bg-rojo" onclick="activarSOS()">
+                <span>AYUDA</span>
+            </button>
+            <p class="label">Emergencia</p>
+        </div>
+    </main>
+
+    <div id="panel-asesoria" class="sub-panel" style="display: none;">
+        <h2 class="label-gris">Tus Apoyos y Código</h2>
+        <div class="card">
+            <div id="qrcode" style="display: flex; justify-content: center; margin: 15px 0;"></div>
+            <p id="estatus-voz" style="font-weight: bold; color: var(--naranja-jalisco);">Tu nieto te escucha...</p>
+        </div>
+        <div class="card" id="lista-programas-voz">
+            </div>
+        <div class="grid-buttons">
+            <button class="btn-opcion" onclick="firmarPorVoz()">FIRMA POR VOZ</button>
+            <button class="btn-opcion" onclick="realizarTramiteVoz()">TRÁMITE VIRTUAL</button>
+        </div>
+        <button class="btn-volver" onclick="cerrarPaneles()">VOLVER AL INICIO</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

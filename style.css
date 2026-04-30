@@ -1,0 +1,55 @@
+:root {
+    --naranja-jalisco: #EE7D11;
+    --gris-institucional: #54565A;
+    --rojo-emergencia: #D32F2F;
+    --fondo-seda: #ECECEC;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--fondo-seda);
+    height: 100vh; overflow: hidden; display: flex; flex-direction: column;
+}
+
+.header-main {
+    height: 10vh; background: white; padding: 0 5vw;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.app-title { font-size: 1.1rem; color: var(--gris-institucional); font-weight: 900; }
+.img-logo { height: 6vh; width: auto; }
+
+.app-container {
+    flex: 1; display: flex; flex-direction: column;
+    justify-content: space-evenly; align-items: center; padding: 2vh 0;
+}
+
+.bubble-wrapper { display: flex; flex-direction: column; align-items: center; }
+
+.bubble {
+    width: 20vh; height: 20vh; max-width: 180px; max-height: 180px;
+    border-radius: 50%; border: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+}
+
+.bubble span { color: white; font-size: 1.4rem; font-weight: 900; pointer-events: none; }
+
+.bg-gris { background: radial-gradient(circle at 30% 30%, var(--gris-institucional), #222); }
+.bg-naranja { background: radial-gradient(circle at 30% 30%, var(--naranja-jalisco), #a8580b); }
+.bg-rojo { background: radial-gradient(circle at 30% 30%, var(--rojo-emergencia), #801b1b); }
+
+.label { margin-top: 1vh; font-size: 1.1rem; color: var(--gris-institucional); font-weight: 900; text-transform: uppercase; }
+
+.sub-panel {
+    position: fixed; inset: 10vh 0 0 0; background: var(--fondo-seda);
+    display: flex; flex-direction: column; align-items: center; padding: 20px; z-index: 100;
+}
+
+.card { background: white; width: 100%; border-radius: 20px; padding: 15px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+.btn-opcion { width: 100%; padding: 15px; margin-bottom: 10px; background: white; border: none; border-radius: 15px; color: var(--naranja-jalisco); font-weight: 900; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
+.btn-volver { padding: 15px 60px; border-radius: 50px; background: var(--gris-institucional); color: white; border: none; font-weight: 900; margin-top: auto; margin-bottom: 20px; }
