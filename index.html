@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DIF Contigo Mayor</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#EE7D11">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <header class="header-main">
+        <h1 class="app-title">DIF Contigo Mayor</h1>
+        <img src="logo dif jalisco.jpg" alt="DIF Jalisco" class="img-logo">
+    </header>
+
+    <main class="app-container" id="menu-principal">
+        <div class="bubble-wrapper">
+            <button class="bubble bg-gris" onclick="accionVoz('acompanar')"><span>PLATICAR</span></button>
+            <p class="label">Compañía</p>
+        </div>
+        <div class="bubble-wrapper">
+            <button class="bubble bg-naranja" onclick="accionVoz('apoyos')"><span>APOYOS</span></button>
+            <p class="label">Tus Trámites</p>
+        </div>
+        <div class="bubble-wrapper">
+            <button class="bubble bg-rojo" onclick="accionVoz('ayuda')"><span>AYUDA</span></button>
+            <p class="label">Emergencia</p>
+        </div>
+    </main>
+
+    <div id="panel-interaccion" class="sub-panel" style="display: none;">
+        <div class="card-simple">
+            <p id="texto-estado" class="instruccion-corta">ESCUCHANDO...</p>
+            <div id="qrcode-area" style="display:none; margin-top:20px; justify-content:center;">
+                <div id="qrcode"></div>
+            </div>
+        </div>
+        <button class="btn-volver-grande" onclick="cerrarPaneles()">VOLVER AL INICIO</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
