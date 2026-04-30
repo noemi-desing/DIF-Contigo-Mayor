@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DIF Contigo Mayor - Consolidado</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <header class="header-main">
+        <h1 class="app-title">DIF Contigo Mayor</h1>
+        <img src="logo dif jalisco.jpg" alt="DIF Jalisco" class="img-logo">
+    </header>
+
+    <main class="app-container" id="menu-principal">
+        <div class="bubble-wrapper">
+            <button id="btn-acompanamiento" class="bubble bg-gris"><span>ACOMPAÑAR</span></button>
+            <p class="label">Día a día</p>
+        </div>
+        <div class="bubble-wrapper">
+            <button id="btn-asesoria" class="bubble bg-naranja"><span>TRÁMITES</span></button>
+            <p class="label">Asistencia Social</p>
+        </div>
+        <div class="bubble-wrapper">
+            <button id="btn-sos" class="bubble bg-rojo"><span>EMERGENCIA</span></button>
+            <p class="label">Ayuda Inmediata</p>
+        </div>
+    </main>
+
+    <div id="panel-asesoria" class="sub-panel" style="display: none;">
+        <h2 class="label-gris">Gestor de Apoyos</h2>
+        <div class="card">
+            <div id="pub-status" class="status-box">IDENTIDAD: PUB ✔️</div>
+            <div id="qrcode" style="display: flex; justify-content: center; margin: 10px 0;"></div>
+            <p style="font-size: 0.8rem; color: #666;">Captura de pantalla para trámites.</p>
+        </div>
+        <div class="card" id="lista-programas">
+            <p><strong>Programas Detectados:</strong></p>
+            <div id="check-list-programas"></div>
+        </div>
+        <div class="grid-buttons">
+            <button class="btn-opcion" onclick="firmarPorVoz()">FIRMA POR VOZ</button>
+            <button class="btn-opcion" onclick="tramiteVirtual()">TRÁMITE VIRTUAL</button>
+            <button class="btn-opcion" onclick="exportarExcel()">REPORTE DIF</button>
+        </div>
+        <button class="btn-volver" onclick="cerrarPaneles()">VOLVER</button>
+    </div>
+
+    <div id="panel-acompanar" class="sub-panel" style="display: none;">
+        <h2 class="label-gris">Tu Memoria</h2>
+        <div class="card">
+            <div id="clima-info">Actualizando clima...</div>
+            <hr style="margin:10px 0; opacity:0.1;">
+            <div id="citas-info"><strong>Cita:</strong> No hay citas.</div>
+        </div>
+        <button class="btn-microfono" onclick="agendarCitaVoz()"><span>HABLAR</span></button>
+        <button class="btn-volver" onclick="cerrarPaneles()">VOLVER</button>
+    </div>
+
+    <div id="panel-sos" class="sub-panel" style="display: none;">
+        <h2 class="label-rojo" style="color:var(--rojo-emergencia);">Círculo Seguro</h2>
+        <div class="card">
+            <p>Se avisará a tus contactos si gritas "Ayuda".</p>
+            <p><strong>Contactos:</strong> Carlos (Hijo), Elena (Vecina)</p>
+        </div>
+        <button class="btn-opcion" style="color:var(--rojo-emergencia);" onclick="sosManual()">SOS MANUAL</button>
+        <button class="btn-volver" onclick="cerrarPaneles()">VOLVER</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
