@@ -1,26 +1,78 @@
 const asistente = window.speechSynthesis;
+const recognition = new (window.webkitSpeechRecognition || window.Recognition)();
+recognition.continuous = true;
+recognition.lang = 'es-MX';
 
-// DATOS DE USUARIO (Simulación de PUB)
 let perfil = {
     nombre: "Rosa María",
     inapam: true,
     transporte: false,
     firmaVoz: false,
-    citas: []
+    proximaCita: "mañana a las 10 en el DIF de Guadalajara"
 };
 
-function hablar(texto) {
+// FUNCIÓN DE VOZ CÁLIDA
+function hablar(texto, callback) {
     if (asistente.speaking) asistente.cancel();
     const mensaje = new SpeechSynthesisUtterance(texto);
     mensaje.lang = 'es-MX';
-    mensaje.rate = 0.9;
+    mensaje.rate = 0.85; // Calma y claridad
+    mensaje.pitch = 1.1; // Tono amable
+    mensaje.onend = () => { if (callback) callback(); };
     asistente.speak(mensaje);
 }
 
-// NAVEGACIÓN
-function abrirPanel(id) {
+// LOGICA DE CONVERSACIÓN (VOZ PRIMERO)
+recognition.onresult = (event) => {
+    const frase = event.results[event.results.length - 1][0].transcript.toLowerCase();
+    
+    if (frase.includes("apoyos") || frase.includes("trámites")) {
+        abrirPanelApoyos();
+    } else if (frase.includes("ayuda") || frase.includes("auxilio")) {
+        activarSOS();
+    } else if (frase.includes("platicar") || frase.includes("hola")) {
+        iniciarPlatica();
+    } else if (frase.includes("sí") || frase.includes("hazlo")) {
+        // La IA entiende confirmación para trámites
+        perfil.transporte = true;
+        hablar("¡Listo, Rosa María! Ya hice tu registro para el transporte. No tienes que preocuparte por nada más.");
+        actualizarUI();
+    }
+};
+
+function iniciarPlatica() {
+    hablar("Hola Rosa María, qué gusto que me hables. Recuerda que tienes tu cita " + perfil.proximaCita + ". ¿Quieres que te platique qué apoyos nuevos hay para ti?");
+}
+
+function abrirPanelApoyos() {
     document.getElementById('menu-principal').style.display = 'none';
-    document.getElementById(id).style.display = 'flex';
+    document.getElementById('panel-asesoria').style.display = 'flex';
+    generarQR();
+    actualizarUI();
+    
+    if (!perfil.transporte) {
+        hablar("Mira Rosa María, aquí está tu código para el DIF. También vi que te falta el apoyo de transporte de Jalisco. Si quieres, yo mando tus papeles por aquí mismo para que no salgas de casa. ¿Te gustaría que lo haga?");
+    } else {
+        hablar("Aquí tienes tus apoyos al día. Todo está en orden, corazón.");
+    }
+}
+
+function actualizarUI() {
+    const listado = document.getElementById('lista-programas-voz');
+    listado.innerHTML = `
+        <p>${perfil.inapam ? '✅' : '❌'} INAPAM</p>
+        <p>${perfil.transporte ? '✅' : '❌'} Apoyo Transporte</p>
+    `;
+}
+
+function generarQR() {
+    const qrDiv = document.getElementById("qrcode");
+    qrDiv.innerHTML = "";
+    new QRCode(qrDiv, { text: "ID:" + perfil.nombre + "-PUB", width: 150, height: 150 });
+}
+
+function activarSOS() {
+    hablar("Tranquila Rosa María, ya le estoy avisando a tu hijo Carlos y a Elena la vecina para que te echen una vuelta. No estás sola.");
 }
 
 function cerrarPaneles() {
@@ -28,77 +80,10 @@ function cerrarPaneles() {
     document.getElementById('menu-principal').style.display = 'flex';
 }
 
-// LÓGICA DE TRÁMITES
-function actualizarProgramas() {
-    const list = document.getElementById('check-list-programas');
-    list.innerHTML = `
-        <p>${perfil.inapam ? '✅' : '❌'} INAPAM</p>
-        <p>${perfil.transporte ? '✅' : '❌'} Apoyo Transporte</p>
-    `;
-    if(!perfil.transporte) {
-        hablar("Rosa, veo que no tienes apoyo de transporte. ¿Quieres que inicie el trámite virtual por ti?");
-    }
-    generarQR();
-}
-
-function firmarPorVoz() {
-    hablar("Por favor, di tu nombre y la frase: Acepto mi registro social.");
-    setTimeout(() => {
-        perfil.firmaVoz = true;
-        hablar("Firma registrada. Tu QR ahora es oficial.");
-        generarQR();
-    }, 4000);
-}
-
-function generarQR() {
-    const qrDiv = document.getElementById("qrcode");
-    qrDiv.innerHTML = "";
-    const data = JSON.stringify({id: "PUB-JAL-001", firma: perfil.firmaVoz});
-    new QRCode(qrDiv, { text: data, width: 120, height: 120 });
-}
-
-// CITAS
-function agendarCitaVoz() {
-    hablar("¿Qué cita quieres que recuerde?");
-    // Simulación de captura
-    setTimeout(() => {
-        const nuevaCita = "Mañana a las 10 AM en el DIF.";
-        document.getElementById('citas-info').innerHTML = `<strong>Cita:</strong> ${nuevaCita}`;
-        hablar("Anotado. Te avisaré 24 horas antes y una hora antes del evento.");
-    }, 3000);
-}
-
-// SEGURIDAD
-function sosManual() {
-    hablar("Avisando a Carlos y Elena que necesitas que te llamen.");
-}
-
-// BOTONES PRINCIPALES
-document.getElementById('btn-acompanamiento').onclick = () => {
-    abrirPanel('panel-acompanar');
-    document.getElementById('clima-info').innerText = "CLIMA JALISCO: 27°C - Soleado";
-};
-
-document.getElementById('btn-asesoria').onclick = () => {
-    abrirPanel('panel-asesoria');
-    actualizarProgramas();
-};
-
-document.getElementById('btn-sos').onclick = () => {
-    abrirPanel('panel-sos');
-    sosManual();
-};
-
-// ESCUCHA "AYUDA"
-const recognition = new (window.webkitSpeechRecognition || window.SpeechRecognition)();
-recognition.continuous = true;
-recognition.lang = 'es-MX';
-recognition.onresult = (event) => {
-    const frase = event.results[event.results.length - 1][0].transcript.toLowerCase();
-    if (frase.includes("ayuda") || frase.includes("socorro")) sosManual();
-};
-recognition.start();
-
+// INICIO AUTOMÁTICO
 window.onload = () => {
-    setTimeout(() => hablar("Hola Rosa María. Estoy lista para ayudarte."), 1000);
+    recognition.start();
+    setTimeout(() => {
+        hablar("Hola Rosa María, soy tu nieto digital. Estoy aquí para cuidarte. Si necesitas algo, solo dímelo.");
+    }, 1000);
 };
