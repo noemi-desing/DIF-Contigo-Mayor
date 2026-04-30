@@ -1,0 +1,52 @@
+:root {
+    --naranja-jalisco: #EE7D11;
+    --gris-institucional: #54565A;
+    --rojo-emergencia: #D32F2F;
+    --fondo-seda: #ECECEC;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body { font-family: 'Segoe UI', sans-serif; background: var(--fondo-seda); height: 100vh; overflow: hidden; }
+
+.full-screen {
+    position: fixed; inset: 0; background: var(--fondo-seda);
+    display: flex; align-items: center; justify-content: center; z-index: 1000;
+}
+
+.header-main { padding: 0 5vw; background: white; display: flex; justify-content: space-between; align-items: center; height: 10vh; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.img-logo { height: 6vh; }
+
+.app-container { flex: 1; display: flex; flex-direction: column; align-items: center; padding-top: 5vh; }
+.bubble-wrapper { display: flex; flex-direction: column; align-items: center; margin-bottom: 2.5vh; }
+
+.bubble {
+    width: 15vh; height: 15vh; border-radius: 50%; border: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2); color: white; font-weight: 900; cursor: pointer;
+}
+
+.bg-gris { background: radial-gradient(circle, var(--gris-institucional), #222); }
+.bg-naranja { background: radial-gradient(circle, var(--naranja-jalisco), #a8580b); }
+.bg-rojo { background: radial-gradient(circle, var(--rojo-emergencia), #801b1b); }
+
+.card-expediente {
+    background: white; width: 90%; border-radius: 20px; padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center;
+}
+
+.doc-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;
+}
+
+.doc-item button {
+    background: var(--naranja-jalisco); color: white; border: none;
+    padding: 5px 15px; border-radius: 10px; font-weight: bold;
+}
+
+.sub-panel { position: fixed; inset: 0; background: var(--fondo-seda); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 500; }
+
+.btn-volver-grande { margin-top: 3vh; padding: 15px 60px; border-radius: 40px; background: var(--gris-institucional); color: white; border: none; font-weight: bold; font-size: 1.2rem; }
+
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+.pulse { animation: pulse 2s infinite; }

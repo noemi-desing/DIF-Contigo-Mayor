@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DIF Contigo Mayor</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#EE7D11">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div id="pantalla-login" class="full-screen">
+        <div class="card-simple">
+            <h2 class="titulo-login">Bienvenida a tu App</h2>
+            <p class="instruccion-corta">DI TU NOMBRE PARA ENTRAR</p>
+            <button class="bubble bg-naranja pulse" onclick="autenticarVoz()">
+                <span id="mic-icon">🎤</span>
+            </button>
+            <p id="status-login" class="label">Toca el micrófono para hablar</p>
+        </div>
+    </div>
+
+    <div id="app-principal" style="display: none;">
+        <header class="header-main">
+            <h1 class="app-title">DIF Contigo</h1>
+            <img src="logo dif jalisco.jpg" alt="DIF" class="img-logo">
+        </header>
+
+        <main class="app-container">
+            <div class="bubble-wrapper">
+                <button class="bubble bg-gris" onclick="accionVoz('acompanar')"><span>PLATICAR</span></button>
+                <p class="label">Acompañamiento</p>
+            </div>
+            
+            <div class="bubble-wrapper">
+                <button class="bubble bg-naranja" onclick="abrirExpediente()"><span>MIS APOYOS</span></button>
+                <p class="label">Trámites y Documentos</p>
+            </div>
+
+            <div class="bubble-wrapper">
+                <button class="bubble bg-rojo" onclick="accionVoz('ayuda')"><span>AYUDA</span></button>
+                <p class="label">Emergencia</p>
+            </div>
+        </main>
+    </div>
+
+    <div id="panel-expediente" class="sub-panel" style="display: none;">
+        <div class="card-expediente">
+            <h3>Mi Expediente Digital</h3>
+            <div class="lista-docs">
+                <div class="doc-item"><span>INE</span> <input type="file" id="file-ine" hidden><button onclick="document.getElementById('file-ine').click()">Subir</button></div>
+                <div class="doc-item"><span>CURP</span> <input type="file" id="file-curp" hidden><button onclick="document.getElementById('file-curp').click()">Subir</button></div>
+            </div>
+            <hr>
+            <p class="label">Tu Código de Atención Única:</p>
+            <div id="qrcode" style="display: flex; justify-content: center; margin: 15px 0;"></div>
+        </div>
+        <button class="btn-volver-grande" onclick="cerrarPaneles()">VOLVER</button>
+    </div>
+
+    <div id="panel-interaccion" class="sub-panel" style="display: none;">
+        <div class="card-simple">
+            <p id="texto-estado" class="instruccion-corta">TE ESCUCHO...</p>
+        </div>
+        <button class="btn-volver-grande" onclick="cerrarPaneles()">VOLVER</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
